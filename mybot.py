@@ -27,11 +27,7 @@ while True:
 
         original_message_id = message.message_id
 
-        if 1 == 1:
-            requests.get(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage?chat_id={message.chat_id}&text={recognition_text}&reply_to_message_id={original_message_id}")
-        else:
-            requests.get(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage?chat_id={message.chat_id}&text={recognition_text}&reply_to_message_id={original_message_id}")
-
+        requests.get(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage?chat_id={message.chat_id}&text={recognition_text}&reply_to_message_id={original_message_id}")
 
         offset += 1
 
