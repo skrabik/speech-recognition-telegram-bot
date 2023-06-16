@@ -1,5 +1,3 @@
-import json
-import requests
 from speech_recognition import *
 from entitys import *
 import time
@@ -16,7 +14,7 @@ else:
 
 while True:
     update = requests.get(f"https://api.telegram.org/bot{BOT_TOKEN}/getUpdates?offset={offset}")
-    if len(update.json()['result']) != 0 and 'voice' in update.json()['result'][0]['message']:
+    if len(update.json()['result']) != 0 and 'message' in update.json()['result'][0] and 'voice' in update.json()['result'][0]['message']:
         start = time.time()
         print('Обработка голосового сообщения ...')
         message = VoiceMessage(update)
@@ -27,9 +25,14 @@ while True:
             file.write(voice_message.content)
         recognition_text = speech_recognition(file_path='message_data/message.mp3')
 
-        original_id = message.message_id
+        original_message_id = message.message_id
 
-        requests.get(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage?chat_id={message.chat_id}&text={recognition_text}&reply_to_message_id={original_id}")
+        if 1 == 1:
+            requests.get(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage?chat_id={message.chat_id}&text={recognition_text}&reply_to_message_id={original_message_id}")
+        else:
+            requests.get(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage?chat_id={message.chat_id}&text={recognition_text}&reply_to_message_id={original_message_id}")
+
+
         offset += 1
 
         stop = time.time()
@@ -42,6 +45,7 @@ while True:
         offset += 1
         with open('lastoffset.txt', 'w') as file:
             file.write(str(offset))
+
 
 
 
