@@ -3,7 +3,7 @@ from entitys import *
 import time
 
 
-BOT_TOKEN = '6067696369:AAEVrzTDSJc3tW_Jb7jF89NjB6MCS6Q89k8'
+BOT_TOKEN = 'Токен вашего бота'
 
 query = requests.get(f"https://api.telegram.org/bot{BOT_TOKEN}/getUpdates")
 
